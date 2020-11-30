@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: eureka
+server:
+  # 配置服务端口
+  port: 18071
+eureka:
+  client:
+    service-url:
+      # 配置eureka服务器地址
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    #是否需要将自己注册到注册中心(注册中心集群需要设置为true)
+    register-with-eureka: false
+    #是否需要搜索服务信息 因为自己是注册中心所以为false
+    fetch-registry: false
+  instance:
+    home-page-url-path: ${server.servlet.context-path}
+    hostname: 127.0.0.1
+    prefer-ip-address: false
+  server:
+    #服务端开启自我保护模式。无论什么情况，服务端都会保持一定数量的服务。避免client与server的网络问题，而出现大量的服务被清除。
+    enable-self-preservation: false
+    renewal-percent-threshold: 0.85
+    expected-client-renewal-interval-seconds: 900000
+    eviction-interval-timer-in-ms: 60000
+
+
